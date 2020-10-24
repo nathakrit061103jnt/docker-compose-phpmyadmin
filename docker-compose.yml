@@ -7,7 +7,7 @@ services:
       container_name: appsDB
       restart: always
       ports:
-       - '3366:3306'
+       - '3306:3306'
       networks:
        - mysql-db
       environment:

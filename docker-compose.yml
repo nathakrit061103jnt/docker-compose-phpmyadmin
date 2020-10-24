@@ -1,0 +1,35 @@
+version: '3.2'
+
+services: 
+
+   db:
+      image: mysql:8.0
+      container_name: appsDB
+      restart: always
+      ports:
+       - '3366:3306'
+      networks:
+       - mysql-db
+      environment:
+        MYSQL_ROOT_PASSWORD: 12345678
+      
+
+   app:
+      depends_on:
+       - db
+      image: phpmyadmin/phpmyadmin
+      container_name: phpmyadmin
+      restart: always
+      ports:
+       - '8080:80'
+      networks:
+       - mysql-db
+      environment:
+        PMA_HOST: db
+
+volumes:
+  node-red-data:
+
+networks:
+  mysql-db:
+      driver: bridge
